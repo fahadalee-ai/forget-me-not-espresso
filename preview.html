@@ -280,17 +280,17 @@
   </div>
 
     <script>
-      const PRODUCTION_URL = "https://demo.sourapps.com/on-top-aba/";
+      const PRODUCTION_URL = "https://demo.sourapps.com/";
 
     function defaultAppUrl() {
       if (location.protocol === "file:") {
-        return "http://localhost:5173/on-top-aba/";
-      }
-      if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
-        return location.origin + "/on-top-aba/";
+        return "http://localhost:8080/";
       }
       if (location.pathname.endsWith("preview.html")) {
         return location.origin + location.pathname.replace(/preview\.html$/, "");
+      }
+      if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+        return location.origin + "/";
       }
       return PRODUCTION_URL;
     }
