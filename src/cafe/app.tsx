@@ -35,13 +35,12 @@ export function CafeApp() {
   if (cafe.phase === "permissions") screen = <Permissions />;
   if (cafe.phase === "app") screen = <Main />;
 
-  const lightAuth = cafe.phase === "welcome" || cafe.phase === "login" || cafe.phase === "register" || cafe.phase === "forgot" || cafe.phase === "otp" || cafe.phase === "reset";
   const anim = cafe.dir === "pop" ? "anim-pop" : cafe.dir === "push" ? "anim-push" : "anim-fade";
   const routeKey = cafe.phase === "app" ? `${cafe.tab}-${cafe.route.name}-${"itemId" in cafe.route ? cafe.route.itemId : ""}-${"orderId" in cafe.route ? cafe.route.orderId : ""}` : cafe.phase;
 
   return (
     <div className="stage-center">
-      <div className="phone" data-theme={lightAuth ? "light" : cafe.resolvedTheme} style={{ ["--text-scale" as string]: String(cafe.textScale) }}>
+      <div className="phone" data-theme={cafe.resolvedTheme} style={{ ["--text-scale" as string]: String(cafe.textScale) }}>
         {cafe.phase !== "splash" && cafe.phase !== "onboarding" && <StatusBar />}
         <div key={routeKey} className={anim} style={{ position: "absolute", inset: 0 }}>
           {screen}

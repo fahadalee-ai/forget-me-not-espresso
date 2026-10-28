@@ -82,7 +82,7 @@ function AppleMark() {
 
 export function Welcome() {
   const cafe = useCafe();
-  const logo = asset("brand/logo.png");
+  const logo = asset(cafe.resolvedTheme === "dark" ? "brand/logo-w.png" : "brand/logo.png");
   return (
     <div className="page welcome">
       <div className="welcome-hero">
@@ -154,7 +154,7 @@ export function Auth() {
   const [diet, setDiet] = useState<string[]>([]);
   const [terms, setTerms] = useState(false);
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
-  const logo = asset("brand/logo.png");
+  const logo = asset(cafe.resolvedTheme === "dark" ? "brand/logo-w.png" : "brand/logo.png");
 
   if (cafe.phase === "login") {
     return (
@@ -264,6 +264,7 @@ export function Auth() {
             <input
               key={index}
               value={digit}
+              size={1}
               inputMode="numeric"
               autoComplete={index === 0 ? "one-time-code" : "off"}
               maxLength={1}

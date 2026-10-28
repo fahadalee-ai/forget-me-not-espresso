@@ -375,12 +375,17 @@ img { max-width: 100%; display: block; }
   .admin-grid { grid-template-columns: 1fr; }
 }
 
-.welcome { background: #faf7f2; color: #1c1917; }
+.welcome { background: var(--background); color: var(--foreground); }
 .welcome-hero { position: relative; height: 46%; min-height: 250px; }
 .welcome-hero img { width: 100%; height: 100%; object-fit: cover; object-position: center 42%; }
 .welcome-fade {
   position: absolute; inset: 0;
-  background: linear-gradient(to top, #faf7f2 0%, rgba(250, 247, 242, 0.35) 28%, rgba(250, 247, 242, 0.05) 58%);
+  background: linear-gradient(to top, var(--background) 0%, color-mix(in srgb, var(--background) 35%, transparent) 28%, color-mix(in srgb, var(--background) 5%, transparent) 58%);
+}
+[data-theme="dark"] .welcome-hero img,
+[data-theme="dark"] .auth-bg { filter: brightness(0.62) saturate(0.85); }
+[data-theme="dark"] .welcome-fade {
+  background: linear-gradient(to top, var(--background) 6%, color-mix(in srgb, var(--background) 82%, transparent) 38%, color-mix(in srgb, var(--background) 28%, transparent) 72%);
 }
 .welcome-sheet { position: relative; margin-top: -72px; padding: 0 22px 28px; text-align: center; }
 .welcome-sheet .auth-mark { margin: 0 auto; }
@@ -395,18 +400,21 @@ img { max-width: 100%; display: block; }
 }
 .auth-lead { color: var(--muted-foreground); font-size: 17px; line-height: 1.45; margin: 0 0 20px; }
 .auth-actions { display: grid; gap: 10px; }
-.auth { padding: 0 0 28px; background: #faf7f2; color: #1c1917; }
+.auth { padding: 0 0 28px; background: var(--background); color: var(--foreground); }
 .auth-bg {
   position: absolute; top: 0; left: 0; right: 0; height: 340px; width: 100%;
   object-fit: cover; object-position: center 35%;
 }
 .auth-bg-fade {
   position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(to bottom, rgba(250,247,242,0.08) 0%, rgba(250,247,242,0.55) 150px, #faf7f2 300px);
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--background) 8%, transparent) 0%, color-mix(in srgb, var(--background) 55%, transparent) 150px, var(--background) 300px);
+}
+[data-theme="dark"] .auth-bg-fade {
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--background) 22%, transparent) 0%, color-mix(in srgb, var(--background) 84%, transparent) 130px, var(--background) 250px);
 }
 .auth-front { position: relative; z-index: 1; }
-.auth .nav-sticky.solid { background: linear-gradient(to bottom, rgba(250,247,242,0.82), rgba(250,247,242,0)); }
-.auth .auth-card { background: rgba(255,255,255,0.94); }
+.auth .nav-sticky.solid { background: linear-gradient(to bottom, color-mix(in srgb, var(--background) 88%, transparent), transparent); }
+.auth .auth-card { background: var(--card); }
 .auth-back { margin: 0 0 8px -8px; font-size: 17px; font-weight: 600; }
 .auth .auth-mark { margin: 8px 0 4px; }
 .auth h1 { font-size: 32px; margin: 12px 0 8px; }
@@ -421,6 +429,7 @@ img { max-width: 100%; display: block; }
   width: 100%; border: 0; background: transparent; color: var(--foreground);
   font-size: 17px; padding: 3px 0 1px; outline: none;
 }
+.auth-field input::placeholder { color: var(--dim); }
 .auth-reveal {
   border: 0; background: transparent; color: var(--accent-text);
   font-weight: 650; font-size: 15px; min-width: 44px; min-height: 44px;
@@ -441,9 +450,10 @@ img { max-width: 100%; display: block; }
 .auth-chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .auth-check { display: flex; gap: 12px; align-items: flex-start; margin: 16px 0; font-size: 15px; line-height: 1.35; }
 .auth-check input { width: 22px; height: 22px; margin-top: 2px; flex: none; }
-.otp-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+.otp-row { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; width: 100%; }
 .otp-row input {
-  height: 54px; text-align: center; font-size: 22px; font-weight: 700; border-radius: 8px;
+  width: 100%; min-width: 0; height: 52px; padding: 0; text-align: center;
+  font-size: 22px; font-weight: 700; border-radius: 8px;
   border: 1px solid var(--border); background: var(--card); color: var(--foreground);
 }
 .auth .btn { margin-top: 24px; }
